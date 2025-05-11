@@ -1,0 +1,42 @@
+.main-register{
+    display: flex;
+    flex: wrap;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.main-login{
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+}
+
+.form-login{
+    border: 3px solid #444;
+    display: grid;
+    gap: 15px;
+    max-width: 500px;
+    padding: 50px 70px;
+    padding-bottom: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#cc-login{
+    font-size: 14px;
+    position: absolute;
+    top: 430px;
+}
+
+#forget-login{
+    font-size: 14px;
+    position: absolute;
+    top: 430px;
+    left: 670px;
+}
+
+.submit{
+    margin-top: 25px;
+    padding: 5px;
+}
