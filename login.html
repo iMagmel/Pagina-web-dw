@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesion</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <main class="main-login">
@@ -18,7 +19,8 @@
 
             <fieldset class="f-login">
                 <legend>Contraseña</legend>
-                <input type="password" class="i-login">
+                <input type="password" class="i-login" id="pass">
+                <i class='bxr  bx-eye-alt'></i> <input type="checkbox" id="ver-pass" onclick="verPass()">
             </fieldset>
             <label for="" id="cc-login"><a href="register.html">Crear cuenta</a></label>
             <label for="" id="forget-login"><a href="forgetpass.html">Olvide mi contraseña</a></label>
@@ -26,5 +28,18 @@
             <button type="submit" class="submit">Ingresar</button>
         </div>
     </main>
+    <script>
+        function verPass(){
+    let pass = document.getElementById("pass")
+    if (pass.type === "password")
+    {
+        pass.type = "text"
+    }
+    else
+    {
+        pass.type = "password"
+    }
+}
+    </script>
 </body>
 </html>
