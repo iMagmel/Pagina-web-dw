@@ -1,0 +1,54 @@
+header {
+    background-color: #F5F0E6;
+    padding: 0.3rem;
+}
+
+nav {
+    display: flex;
+    margin: 0 1rem;
+}
+
+nav p {
+    margin: 1rem;
+    position: relative;
+    left: 62rem;
+}
+
+p {
+    color: #4B4B4B;
+}
+
+a {
+    color: #5A7D9A;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #4A5A6A;
+}
+
+section {
+    padding: 3rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+ul,ol {
+    padding-left: 1.5rem;
+}
+
+body {
+    margin: 0;
+    background-color: #FAF9F7;
+}
+
+footer {
+    background-color: #F5F0E6;
+    padding: 0.5rem;
+    text-align: center;
+}

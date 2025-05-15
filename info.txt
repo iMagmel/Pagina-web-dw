@@ -1,0 +1,35 @@
+COLORES
+
+| Elemento            | Color              | Hex       |
+| ------------------- | ------------------ | --------- |
+| Fondo principal     | Blanco cálido      | `#FAF9F7` |
+| Texto principal     | Gris suave         | `#4B4B4B` |
+| Primario (acento)   | Verde salvia       | `#A8C3B0` |
+| Secundario suave    | Lavanda grisácea   | `#C3B8D9` |
+| Detalles neutros    | Arena clara        | `#EDE6DB` |
+| Hover/acento oscuro | Verde musgo oscuro | `#6D8E7B` |
+
+🖋️ Tipografía sugerida
+Títulos: 'Playfair Display' (elegante y relajante)
+
+Texto general: 'Lato' o 'Inter' (limpias y legibles)
+
+
+🌿 Estilo visual
+Minimalismo cálido: mucho espacio en blanco, bordes redondeados sutiles, íconos lineales
+
+Imágenes de apoyo: manos en acción, piedras calientes, aceites esenciales (todo con tonos apagados y luz natural)
+
+
+📅 2. Reservar Turno
+Formulario con pasos simples:
+
+Elegir tipo de servicio
+
+Seleccionar profesional (opcional)
+
+Elegir fecha y hora (con calendario interactivo)
+
+Ingresar datos (nombre, email, teléfono)
+
+Confirmar
