@@ -1,3 +1,10 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+    background-color: #FAF9F7;
+}
 .main-register{
     display: flex;
     justify-content: center;
@@ -24,14 +31,23 @@
     text-align: center;
     background-color: #F5F0E6;
 }
+.form-login h2{
+    color: #4B4B4B;
+}
 
+legend{
+    color: #4B4B4B;
+    font-size: 14px;
+}
 #cc-login{
+    color: #C3B8D9;
     font-size: 14px;
     position: relative;
     right: 75px;
 }
 
 #forget-login{
+    color: #C3B8D9;
     font-size: 14px;
     position: relative;
     top: -22px;
@@ -39,60 +55,137 @@
 }
 
 .submit{
-    padding: 5px;
+    background-color: #DADADA;
+    color: #333;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.submit:hover{
+    background-color: #BFBFBF;
 }
 
 header {
+      display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
     background-color: #F5F0E6;
-    padding: 0.3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-    display: flex;
-    margin: 0 1rem;
+header h1 {
+    font-size: 2rem;
+    margin: 10px;
+    padding: 0.5rem;
+    color: #333;
+    text-align: center;
+    font-family: "poppins", sans-serif;
 }
 
-nav p {
-    margin: 1rem;
-    position: relative;
-    left: 62rem;
-}
-
-p {
-    color: #4B4B4B;
-}
-
-a {
-    color: #5A7D9A;
+.nav-links a {
+    margin-left: 1rem;
     text-decoration: none;
 }
 
-a:hover {
-    color: #4A5A6A;
+.Turno-btn {
+    background-color: #A8C9C9;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Turno-btn:hover {
+    background-color: #7AA7A7;
+}
+
+.log-btn {
+    background-color: #DADADA;
+    color: #333;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.log-btn:hover {
+    background-color: #BFBFBF;
+}
+
+
+main {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 section {
-    padding: 3rem 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    transition: transform 0.2s ease;
 }
 
-h2 {
+section:hover {
+    transform: scale(1.01);
+}
+
+
+section h2 {
     font-size: 1.8rem;
+    color: #5A7D9A;
     margin-bottom: 1rem;
-    color: #333;
+    border-left: 5px solid #A8C9C9;
+    padding-left: 0.5rem;
 }
 
-ul,ol {
+
+section ul,
+section ol {
     padding-left: 1.5rem;
+    color: #555;
+    line-height: 1.6;
 }
 
-body {
-    margin: 0;
-    background-color: #FAF9F7;
+
+section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+
+#terapeutas li {
+    margin-bottom: 0.5rem;
+}
+
+
+#contacto a {
+    color: #5A7D9A;
+    font-weight: bold;
+}
+
+#contacto a:hover {
+    color: #7AA7A7;
 }
 
 footer {
     background-color: #F5F0E6;
-    padding: 0.5rem;
+    color: #4B4B4B;
     text-align: center;
+    padding: 1rem 0;
+    font-size: 0.95rem;
+    border-top: 1px solid #ddd;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
 }
