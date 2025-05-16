@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pedir Turno</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="">
-        <div class="">
+    <main class="main-login">
+        <div class="form-login">
             <h2>Reservar Turno</h2>
 
-            <select name="" id="">
+            <label for="tipo">Elegir tipo de masaje:</label>
+            <select name="tipo" >
                 <option value="">Masajes relajantes y aromaterapia</option>
                 <option value="">Descontracturante y deportivo</option>
                 <option value="">Reflexología podal</option>
                 <option value="">Atención integral</option>
             </select>
 
+            <label for="fecha">Elegir fecha:</label>
+            <input type="date" name="fecha">
+
+            <label for="hora">Elegir hora:</label>
+            <input type="time" name="hora">
             
-            <button type="submit" class="submit">Ingresar</button>
+            <button type="submit" class="submit">Confirmar Turno</button>
         </div>
     </main>
 </body>
