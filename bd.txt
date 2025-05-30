@@ -1,0 +1,10 @@
+CREATE DATABASE calmaturnos;
+
+CREATE TABLE Usuarios(
+    id_usu int AUTO_INCREMENT PRIMARY KEY,
+	nombre varchar(20) not null,
+    apellido varchar(20) not null,
+    n_usuario varchar(30) not null,
+    email varchar(50) not null,
+    contrasena varchar(30) not null
+);

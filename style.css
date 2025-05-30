@@ -194,7 +194,7 @@ footer p {
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 737px) {
     .form-login {
         padding: 1rem;
     }
