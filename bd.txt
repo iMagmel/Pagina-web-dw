@@ -8,3 +8,18 @@ CREATE TABLE Usuarios(
     email varchar(50) not null,
     contrasena varchar(30) not null
 );
+
+DELIMITER $$
+CREATE PROCEDURE sp_CrearUsuario(
+IN _nombre VARCHAR(20),
+IN _apellido VARCHAR(20),
+IN _usuario VARCHAR(30),
+IN _email VARCHAR(50),
+IN _contrasena VARCHAR(30))
+BEGIN
+	INSERT INTO usuarios(nombre, apellido, n_usuario, email, contrasena)
+	VALUES(_nombre, _apellido, _usuario, _email, _contrasena);
+END$$
+DELIMITER ;
+
+
