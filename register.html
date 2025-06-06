@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <main class="main-register">
         <form action="register.php" method="post" class="form-login">
@@ -13,52 +15,61 @@
 
             <fieldset class="f-login">
                 <legend>Nombre</legend>
-                <input type="text" class="i-login" nameplaceholder="Nombre">
+                <input type="text" class="i-login" name="nombre" placeholder="Nombre" />
             </fieldset>
 
             <fieldset class="f-login">
                 <legend>Apellido</legend>
-                <input type="text" class="i-login" name="apellido" placeholder="Apellido">
+                <input type="text" class="i-login" name="apellido" placeholder="Apellido" />
             </fieldset>
-            
+
             <fieldset class="f-login">
                 <legend>Nombre de usuario</legend>
-                <input type="text" class="i-login" name="n_usuario" placeholder="Nombre de usuario">
+                <input type="text" class="i-login" name="n_usuario" placeholder="Nombre de usuario" />
             </fieldset>
-            
+
             <fieldset class="f-login">
                 <legend>Correo electronico</legend>
-                <input type="text" class="i-login" name="email" placeholder="Correo electronico">
+                <input type="text" class="i-login" name="email" placeholder="Correo electronico" />
             </fieldset>
 
             <fieldset class="f-login">
                 <legend>Contraseña</legend>
-                <input type="password" class="i-login" id="pass" name="contrasena" placeholder="Contraseña">
-                <input type="checkbox" id="ver-pass" onclick="verPass()">
-            </fieldset>
-            
-            <fieldset class="f-login">
-                <legend>Repetir contraseña</legend>
-                <input type="password" class="i-login" id="pass" name="rcontrasena" placeholder="Repetir contraseña">
-                <input type="checkbox" id="ver-pass" onclick="verPass()">
+                <input type="password" class="i-login" id="pass1" name="contrasena" placeholder="Contraseña" />
+                <input type="checkbox" onclick="verPass('pass1')" />
             </fieldset>
 
-            <input type="submit" class="submit" value="Registrarse">
+            <fieldset class="f-login">
+                <legend>Repetir contraseña</legend>
+                <input type="password" class="i-login" id="pass2" name="rcontrasena" placeholder="Repetir contraseña" />
+                <input type="checkbox" onclick="verPass('pass2')" />
+            </fieldset>
+
+            <input type="submit" class="submit" value="Registrarse" />
         </form>
     </main>
 
     <script>
-        function verPass(){
-    let pass = document.getElementById("pass")
-    if (pass.type === "password")
-    {
-        pass.type = "text"
-    }
-    else
-    {
-        pass.type = "password"
-    }
-}
+        document.querySelector('.form-login').addEventListener('submit', function (event) {
+            const inputs = this.querySelectorAll('input[type="text"], input[type="password"]');
+            for (let input of inputs) {
+                if (input.value.trim() === '') {
+                    event.preventDefault();
+                    input.focus();
+                    return;
+                }
+            }
+        });
+
+        function verPass(id) {
+            let pass = document.getElementById(id);
+            if (pass.type === "password") {
+                pass.type = "text";
+            } else {
+                pass.type = "password";
+            }
+        }
     </script>
 </body>
+
 </html>
