@@ -22,4 +22,12 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarUsuario(IN _usuario VARCHAR(30), IN _contrasena VARCHAR(30))
+BEGIN
+    SELECT n_usuario, contrasena
+    FROM usuarios
+    WHERE n_usuario = _usuario AND contrasena = _contrasena;
+END$$
+DELIMITER ;
 
