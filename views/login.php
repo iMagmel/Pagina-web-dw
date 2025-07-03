@@ -1,26 +1,29 @@
+<?php
+session_start()
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesion</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
    
     <main class="main-login">
-        <form action="login.php" method="post" class="form-login">
+        <form action="login.php" method="POST" class="form-login">
             <h2>Inicio de sesion</h2>
 
             <fieldset class="f-login">
                 <legend>Nombre de usuario</legend>
-                <input type="text" class="i-login" placeholder="Nombre de usuario">
+                <input type="text" class="i-login" placeholder="Nombre de usuario" name="usuario">
             </fieldset>
 
             <fieldset class="f-login">
                 <legend>Contraseña</legend>
-                <input type="password" class="i-login" id="pass" placeholder="Contraseña">
+                <input type="password" class="i-login" id="pass" placeholder="Contraseña" name="password">
               <input type="checkbox" id="ver-pass" onclick="verPass()">
             </fieldset>
             <label id="cc-login"><a href="register.html">Crear cuenta</a></label>
@@ -30,6 +33,7 @@
         </form>
     </main>
     <script>
+        
         function verPass(){
     let pass = document.getElementById("pass")
     if (pass.type === "password")
