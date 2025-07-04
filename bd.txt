@@ -31,3 +31,44 @@ BEGIN
 END$$
 DELIMITER ;
 
+use calmaturnos;
+
+DELIMITER $$
+CREATE PROCEDURE sp_AgregarTurno(IN _terapeuta varchar(20), IN _fecha DATE, IN _hora TIME, IN _usuario varchar(20))
+BEGIN
+	SELECT id_terapeuta, id_usuario
+    FROM turnos
+    WHERE Terapeutas.Nombre = _terapeuta AND Usuarios.n_usuario = _usuario;
+
+    INSERT INTO Turnos(fecha, hora, id_terapeuta, id_usuario)
+	VALUES(_fecha, _hora, id_terapeuta, id_usuario);
+END$$
+DELIMITER ; 
+
+use calmaturnos;
+DELIMITER $$
+CREATE PROCEDURE SP_GuardarCodRecuperacion(IN _email VARCHAR(100), IN _codigo VARCHAR(10))
+BEGIN
+	UPDATE Usuarios
+	SET codrecuperacion = _codigo
+	WHERE email = _email;
+END $$;
+
+use calmaturnos;
+DELIMITER $$
+CREATE PROCEDURE SP_VerificarCodRecuperacion(IN _email VARCHAR(100), IN _codigo VARCHAR(10))
+
+BEGIN
+	SELECT id_Usu
+	FROM Usuarios
+	WHERE email = _email AND codrecuperacion = _codigo;
+END $$;
+
+use calmaturnos;
+DELIMITER $$
+CREATE PROCEDURE SP_VerificarEmail(IN _email VARCHAR(100))
+
+BEGIN
+	SELECT id_usu FROM Usuarios WHERE email = _email;
+END$$;
+

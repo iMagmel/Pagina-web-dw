@@ -1,6 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['recuperar_email'])) {
+  header("Location: /Pagina-web-dw/views/fpass1.php");
+  exit;
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,29 +16,9 @@
 </head>
 
 <body>
-    <main class="main-register">
-        <form action="register.php" method="post" class="form-login">
-            <h2>Registro</h2>
-
-            <fieldset class="f-login">
-                <legend>Nombre</legend>
-                <input type="text" class="i-login" name="nombre" placeholder="Nombre" />
-            </fieldset>
-
-            <fieldset class="f-login">
-                <legend>Apellido</legend>
-                <input type="text" class="i-login" name="apellido" placeholder="Apellido" />
-            </fieldset>
-
-            <fieldset class="f-login">
-                <legend>Nombre de usuario</legend>
-                <input type="text" class="i-login" name="n_usuario" placeholder="Nombre de usuario" />
-            </fieldset>
-
-            <fieldset class="f-login">
-                <legend>Correo electronico</legend>
-                <input type="text" class="i-login" name="email" placeholder="Correo electronico" />
-            </fieldset>
+    <main class="main-login">
+        <form  method="post" class="form-login">
+            <h2>Renova tu contraseña</h2>
 
             <fieldset class="f-login">
                 <legend>Contraseña</legend>

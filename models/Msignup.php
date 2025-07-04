@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/db/conexionbd/php';
+require_once __DIR__ . '/../models/db/conexionbd.php';
 
 class Msingup {
     private $con;

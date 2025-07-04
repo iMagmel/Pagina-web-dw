@@ -26,7 +26,7 @@ session_start()
                 <input type="password" class="i-login" id="pass" placeholder="Contraseña" name="password">
               <input type="checkbox" id="ver-pass" onclick="verPass()">
             </fieldset>
-            <label id="cc-login"><a href="register.html">Crear cuenta</a></label>
+            <label id="cc-login"><a href="../controllers/Csignup.php">Crear cuenta</a></label>
             <label id="forget-login"><a href="forgetpass.html">Olvide mi contraseña</a></label>
 
             <button type="submit" class="submit">Ingresar</button>

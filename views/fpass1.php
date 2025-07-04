@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Olvidaste tu contraseña?</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <main class="main-login">
         <div class="form-login">
-            <h2>Recupera tu cuenta</h2>
+            <h2>Ingresa tu correo electronico</h2>
 
             <fieldset class="f-login">
                 <legend>Correo electronico</legend>
-                <input type="email" class="i-login" placeholder="Correo electronico">
+                <input type="email" name = "email" class="i-login">
             </fieldset>
             
-            <button type="submit" class="submit">Recuperar</button>
+            <button type="submit" class="submit">Ingresar</button>
         </div>
     </main>
 </body>

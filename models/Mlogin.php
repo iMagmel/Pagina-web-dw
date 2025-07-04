@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/db/conexionbd/php';
+require_once __DIR__ . '../db/conexionbd.php';
 
 class MLogin {
     private $con;

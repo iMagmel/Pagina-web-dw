@@ -1,12 +1,11 @@
 <?php
 
 class Conexion {
-
     public function Conectar($servidor, $usu, $contra, $db){
-        private $servidor = "localhost";
-        private $usu = "root";
-        private $contra = "";
-        private $db = "calmaturnos";
+        $servidor = "localhost";
+        $usu = "root";
+        $contra = "";
+        $db = "calmaturnos";
 
         $conexion = new mysqli($servidor, $usu, $contra, $db);
 
