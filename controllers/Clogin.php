@@ -1,4 +1,4 @@
-    <?php
+<?php
     require_once __DIR__ . '/../models/Mlogin.php';
 
     class log {
@@ -30,4 +30,4 @@
 }
 
 require_once __DIR__ . '/../views/login.php';
-    ?>
+?>
