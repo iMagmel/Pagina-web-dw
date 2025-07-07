@@ -1,7 +1,7 @@
 <?php
 
 class Conexion {
-    public function Conectar($servidor, $usu, $contra, $db){
+    public function Conectar(){
         $servidor = "localhost";
         $usu = "root";
         $contra = "";

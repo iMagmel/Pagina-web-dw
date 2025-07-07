@@ -9,9 +9,9 @@ class Msingup {
     }
 
     public function Sign($nombre, $apellido, $usuario, $email, $password) {
-        $sql = "CALL sp_CrearUsuario(?,?,?,?,?)";
+        $sql = "CALL sp_CrearUsuario ?, ?, ?, ?, ?";
         $stmt = $this->con->prepare($sql);
-        $stmt->execute([$nombre, $apellido, $usuario, $email, $password]);
+        $stmt->bind_param("sssss", $nombre, $apellido, $usuario, $email, $password);
         return $stmt;
     }
 }  

@@ -1,4 +1,5 @@
 <?php
+
 ?>
 
 <!DOCTYPE html>
@@ -10,12 +11,10 @@
     <title>Registro</title>
     <link rel="stylesheet" href="../css/style.css" />
 </head>
-
 <body>
     <main class="main-register">
-        <form action="register.php" method="post" class="form-login">
+        <form action="" method="post" class="form-login">
             <h2>Registro</h2>
-
             <fieldset class="f-login">
                 <legend>Nombre</legend>
                 <input type="text" class="i-login" name="nombre" placeholder="Nombre" />
@@ -33,7 +32,7 @@
 
             <fieldset class="f-login">
                 <legend>Correo electronico</legend>
-                <input type="text" class="i-login" name="email" placeholder="Correo electronico" />
+                <input type="email" class="i-login" name="email" placeholder="Correo electronico" />
             </fieldset>
 
             <fieldset class="f-login">
@@ -48,21 +47,12 @@
                 <input type="checkbox" onclick="verPass('pass2')" />
             </fieldset>
 
-            <input type="submit" class="submit" value="Registrarse" />
+            <input type="submit" class="submit" value = "Registrarse"/>
         </form>
     </main>
 
     <script>
-        document.querySelector('.form-login').addEventListener('submit', function (event) {
-            const inputs = this.querySelectorAll('input[type="text"], input[type="password"]');
-            for (let input of inputs) {
-                if (input.value.trim() === '') {
-                    event.preventDefault();
-                    input.focus();
-                    return;
-                }
-            }
-        });
+     
 
         function verPass(id) {
             let pass = document.getElementById(id);
@@ -74,5 +64,4 @@
         }
     </script>
 </body>
-
 </html>

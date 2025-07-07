@@ -4,7 +4,7 @@
     class Sign {
         public function Registrarusu($nombre, $apellido, $usuario, $email, $password){
         
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST['nombre'] ?? null;
             $apellido = $_POST['apellido'] ?? null;
             $usuario = $_POST['n_usuario'] ?? null;
@@ -23,9 +23,13 @@
 
             $modelo = new Msingup();
             $stmt = $modelo->Sign($nombre, $apellido, $usuario, $email, $password);
-            $result = $stmt->Msingup();
-            header('Location: ../controllers/Clogin.php');
+            
+            return $stmt;
+
+            if ($stmt === true) {  
+            header('Location: /Pagina-web-dw/controllers/Clogin.php');
             exit();
+            }
         }
     }
 }
