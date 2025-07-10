@@ -1,18 +1,22 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedir Turno</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <main class="main-login">
+        <form action="" method="post">
         <div class="form-login">
             <h2>Reservar Turno</h2>
 
-            <label for="tipo">Elegir tipo de masaje:</label>
-            <select name="tipo" >
+            <label for="terapeuta">Elegir tipo de masaje:</label>
+            <select name="terapeuta" >
                 <option value="">Masajes relajantes y aromaterapia</option>
                 <option value="">Descontracturante y deportivo</option>
                 <option value="">Reflexología podal</option>
@@ -27,6 +31,7 @@
             
             <button type="submit" class="submit">Confirmar Turno</button>
         </div>
+        </form>
     </main>
 </body>
 </html>
