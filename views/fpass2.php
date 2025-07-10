@@ -14,6 +14,7 @@ if (!isset($_SESSION['recuperar_email'])) {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <form action="../controllers/Cfpass2.php" method="POST">
     <main class="main-login">
         <div class="form-login">
             <h2>Ingresa el codigo de 4 digitos que se mando en tu correo</h2>
@@ -26,5 +27,6 @@ if (!isset($_SESSION['recuperar_email'])) {
             <button type="submit" class="submit">Ingresar</button>
         </div>
     </main>
+    </form>
 </body>
 </html>

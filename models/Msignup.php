@@ -5,15 +5,26 @@ class Msingup {
     private $con;
 
     public function __construct(){
-        $this->con->Conexion::Conectar();
+        $conexion = new Conexion();
+        $this->con = $conexion->Conectar();
     }
 
     public function Sign($nombre, $apellido, $usuario, $email, $password) {
-        $sql = "CALL sp_CrearUsuario ?, ?, ?, ?, ?";
+        $sql = "CALL sp_CrearUsuario(?, ?, ?, ?, ?)";
         $stmt = $this->con->prepare($sql);
+
+        if (!$stmt) {
+            die("Error al preparar la consulta: " . $this->con->error);
+        }
+
         $stmt->bind_param("sssss", $nombre, $apellido, $usuario, $email, $password);
-        return $stmt;
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return $stmt->error;
+        }
     }
-}  
+}
 
 ?>

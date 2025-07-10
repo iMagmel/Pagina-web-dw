@@ -1,6 +1,8 @@
-<?php
-session_start()
-?>
+<?php if (isset($mensaje)) : ?>
+<script>
+    alert("<?= addslashes($mensaje) ?>");
+</script>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,7 @@ session_start()
 <body>
    
     <main class="main-login">
-        <form action="login.php" method="POST" class="form-login">
+        <form action="" method="POST" class="form-login">
             <h2>Inicio de sesion</h2>
 
             <fieldset class="f-login">
@@ -26,8 +28,8 @@ session_start()
                 <input type="password" class="i-login" id="pass" placeholder="Contraseña" name="password">
               <input type="checkbox" id="ver-pass" onclick="verPass()">
             </fieldset>
-            <label id="cc-login"><a href="../controllers/Csignup.php">Crear cuenta</a></label>
-            <label id="forget-login"><a href="forgetpass.html">Olvide mi contraseña</a></label>
+            <label id="cc-login"><a href="../controllers/CVsignup.php">Crear cuenta</a></label>
+            <label id="forget-login"><a href="../views/fpass1.php">Olvide mi contraseña</a></label>
 
             <button type="submit" class="submit">Ingresar</button>
         </form>

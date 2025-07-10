@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +10,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <form action="../controllers/Cfpass1.php" method="POST">
     <main class="main-login">
         <div class="form-login">
             <h2>Ingresa tu correo electronico</h2>
@@ -19,5 +23,6 @@
             <button type="submit" class="submit">Ingresar</button>
         </div>
     </main>
+    </form>
 </body>
 </html>

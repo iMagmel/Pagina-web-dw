@@ -1,6 +1,8 @@
-<?php
-
-?>
+<?php if (isset($mensaje)) : ?>
+<script>
+    alert("<?= addslashes($mensaje) ?>");
+</script>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
