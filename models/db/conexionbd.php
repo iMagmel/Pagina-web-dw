@@ -7,7 +7,7 @@ class Conexion {
         $contra = "";
         $db = "calmaturnos";
 
-        $conexion = new mysqli($servidor, $usu, $contra, $db);
+        $conexion = new PDO("mysql:host=$servidor;dbname=$db, $usu, $contra");
 
         if ($conexion->connect_error) {
             die("Conexión fallida: " . $conexion->connect_error);
