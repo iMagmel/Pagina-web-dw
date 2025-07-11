@@ -16,5 +16,5 @@ PHPmailers::enviarCode($email, $codigo);
 
 session_start();
 $_SESSION['recuperar_email'] = $email;
-header("Location: /Pagina-web-dw/views/fpass2.html");
+header("Location: /Pagina-web-dw/views/fpass2.php");
 ?>

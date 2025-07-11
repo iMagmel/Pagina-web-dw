@@ -15,7 +15,7 @@ class Log {
             $_SESSION["id_usu"] = $resultado["id_usu"];
             $_SESSION["n_usuario"] = $resultado["n_usuario"];
 
-            header("Location: /Pagina-web-dw/views/index.html");
+            header("Location: /Pagina-web-dw/views/index.php");
             exit();
         } else {
             return "Usuario y contraseña incorrectos.";

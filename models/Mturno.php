@@ -5,7 +5,8 @@ class Mturno{
     private $con;
 
     public function __construct(){
-        $this->con = Conexion::Conectar();
+        $conexion = new Conexion();
+        $this->con = $conexion->Conectar();
     }
 
     public function Pedirturno($terapeuta,$fecha, $hora, $usuario) {

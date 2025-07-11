@@ -5,7 +5,7 @@ class CTurno {
         public function Registrarturno($terapeuta, $fecha, $hora, $usu){
 
             $modelo = new Mturno();
-            $stmt = $modelo->PedirTurno($terapeuta, $fecha, $hora, $usu);
+            $stmt = $modelo->Pedirturno($terapeuta, $fecha, $hora, $usu);
             
             return $stmt;
         }

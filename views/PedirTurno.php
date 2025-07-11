@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +19,10 @@ session_start();
 
             <label for="terapeuta">Elegir tipo de masaje:</label>
             <select name="terapeuta" >
-                <option value="">Masajes relajantes y aromaterapia</option>
-                <option value="">Descontracturante y deportivo</option>
-                <option value="">Reflexología podal</option>
-                <option value="">Atención integral</option>
+                <option value="1">Maria Sol</option>
+                <option value="2">esteban ruiz</option>
+                <option value="3">laura m</option>
+                <option value="4">Centro Holistico Kairos</option>
             </select>
 
             <label for="fecha">Elegir fecha:</label>

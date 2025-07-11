@@ -7,9 +7,10 @@ require_once __DIR__ . '/../controllers/Cturno.php';
         $terapeuta = $_POST['terapeuta'] ?? null;
         $fecha = $_POST['fecha'] ?? null;
         $hora = $_POST['hora'] ?? null;
-        $usuario = $_SESSION["id_usu"] ?? null;
+        session_start();
+        $usuario = $_SESSION["id_usu"];
 
-        if (empty($terapeuta) || empty($fecha) || empty($hora) || empty($usuario)) {
+        if (empty($terapeuta)) {
             echo "Todos los campos son obligatorios.";
         }
             
