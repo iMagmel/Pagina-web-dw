@@ -14,6 +14,6 @@ $modelo = new Mfpass();
 $modelo->cambiarContraseña($email, $nueva_contraseña);
 
 unset($_SESSION['recuperar_email']);
-echo "Contraseña cambiada exitosamente. Puedes iniciar sesión con tu nueva contraseña.";
-header("Location: /Pagina-web-dw/views/login.php");
+echo '<script> alert("Contraseña cambiada exitosamente. Puedes iniciar sesión con tu nueva contraseña.")</script>';
+header("Location: /Pagina-web-dw/controllers/Clogin.php");
 ?>

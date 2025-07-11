@@ -4,7 +4,7 @@ require_once __DIR__ . '/../models/db/conexionbd.php';
 class Mfpass {
     private $con;
 
-    public function __construct(){
+    public function __construct() {
         $conexion = new Conexion();
         $this->con = $conexion->Conectar();
     }
@@ -26,6 +26,7 @@ class Mfpass {
         } else {
             return false;
         }
+        $stmt->close();
     }
 
     public function guardarCodigo($email, $codigo) {
@@ -38,6 +39,7 @@ class Mfpass {
 
         $stmt->bind_param("ss", $email, $codigo);
         $stmt->execute();
+        $stmt->close();
     }
 
     public function verificarCodigo($email, $codigo) {
@@ -57,10 +59,12 @@ class Mfpass {
         } else {
             return false;
         }
+
+        $stmt->close();
     }
 
     public function cambiarContraseña($contraseña, $nueva_contraseña) {
-        $sql = "CALL SP_CambiarContraseña(?, ?)";
+        $sql = "CALL SP_CambiarContrasena(?, ?)";
         $stmt = $this->con->prepare($sql);
 
         if (!$stmt) {
@@ -69,6 +73,7 @@ class Mfpass {
 
         $stmt->bind_param("ss", $contraseña, $nueva_contraseña);
         $stmt->execute();
+        $stmt->close();
     }
 }
 ?>

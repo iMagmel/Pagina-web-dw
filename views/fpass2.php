@@ -21,7 +21,7 @@ if (!isset($_SESSION['recuperar_email'])) {
 
             <fieldset class="f-login">
                 <legend>Codigo Recuperacion</legend>
-                <input type="number" class="i-login" maxlength="4" required placeholder="••••">
+                <input type="number" class="i-login" maxlength="4" name = "codigo" required placeholder="••••">
             </fieldset>
             
             <button type="submit" class="submit">Ingresar</button>

@@ -17,7 +17,7 @@ if (!isset($_SESSION['recuperar_email'])) {
 
 <body>
     <main class="main-login">
-        <form action = "../controllers/Cfpass3.php" method="post" class="form-login">
+        <form action = "../controllers/Cfpass3.php" method="POST" class="form-login">
             <h2>Renova tu contraseña</h2>
 
             <fieldset class="f-login">
