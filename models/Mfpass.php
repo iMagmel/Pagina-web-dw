@@ -64,7 +64,7 @@ class Mfpass {
     }
 
     public function cambiarContraseña($contraseña, $nueva_contraseña) {
-        $sql = "CALL SP_CambiarContrasena(?, ?)";
+        $sql = "CALL sp_CambiarContrasena(?, ?)";
         $stmt = $this->con->prepare($sql);
 
         if (!$stmt) {

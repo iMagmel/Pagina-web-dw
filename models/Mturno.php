@@ -18,7 +18,7 @@ class Mturno {
         }
 
         // Importante: validar los tipos de datos. Si terapeuta y usuario son enteros:
-        $stmt->bind_param("issi", $fecha, $hora, $terapeuta, $usuario);
+        $stmt->bind_param("ssis", $fecha, $hora, $terapeuta, $usuario);
 
         if ($stmt->execute()) {
             $stmt->close();

@@ -30,6 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Mostrar el formulario (o incluir la vista)
+
 require_once __DIR__ . '/../views/PedirTurno.php';
 ?>
