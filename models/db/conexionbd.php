@@ -13,6 +13,7 @@ class Conexion {
             die("Conexión fallida: " . $conexion->connect_error);
         }
 
+        $conexion->set_charset("utf8mb4");
         return $conexion;
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2025 a las 16:25:45
+-- Tiempo de generación: 17-07-2025 a las 23:06:36
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -63,6 +63,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GuardarCodRecuperacion` (IN `_em
     WHERE email = _email;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTerapeutas` ()  BEGIN
+    SELECT id_terapeuta, nombre, apellido, descripcion
+    FROM terapeutas
+    ORDER BY id_terapeuta ASC;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTurnosUsuario` (IN `_id_usuario` INT)  BEGIN
+    SELECT t.id_turno, t.fecha, t.hora, te.nombre AS nombre_terapeuta, te.apellido AS apellido_terapeuta, te.descripcion
+    FROM turnos t
+    INNER JOIN terapeutas te ON t.id_terapeuta = te.id_terapeuta
+    WHERE t.id_usuario = _id_usuario
+    ORDER BY t.fecha DESC, t.hora DESC;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))  BEGIN
     SELECT id_usu
     FROM usuarios
@@ -88,7 +102,7 @@ CREATE TABLE `terapeutas` (
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `descripcion` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `terapeutas`
@@ -112,16 +126,18 @@ CREATE TABLE `turnos` (
   `hora` time DEFAULT NULL,
   `id_terapeuta` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `turnos`
 --
 
 INSERT INTO `turnos` (`id_turno`, `fecha`, `hora`, `id_terapeuta`, `id_usuario`) VALUES
-(2, '0000-00-00', '14:22:00', 1, NULL),
-(3, '0000-00-00', '11:27:00', 1, NULL),
-(4, '2025-07-03', '15:25:00', 1, 1);
+(4, '2025-07-03', '15:25:00', 1, 1),
+(6, '2025-07-01', '16:42:00', 2, 1),
+(7, '2025-07-03', '22:36:00', 1, 1),
+(8, '2025-07-06', '22:37:00', 2, 1),
+(9, '2025-07-03', '17:47:00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +153,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `contrasena` varchar(30) NOT NULL,
   `codrecuperacion` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -184,7 +200,7 @@ ALTER TABLE `terapeutas`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

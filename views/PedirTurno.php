@@ -17,19 +17,22 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="form-login">
             <h2>Reservar Turno</h2>
 
-            <label for="terapeuta">Elegir tipo de masaje:</label>
-            <select name="terapeuta" >
-                <option value="1">Maria Sol</option>
-                <option value="2">esteban ruiz</option>
-                <option value="3">laura m</option>
-                <option value="4">Centro Holistico Kairos</option>
-            </select>
+   <label for="terapeuta">Elegir tipo de masaje:</label>
+<select name="terapeuta" required >
+    <option value="">Seleccionar terapeuta</option>
+    <?php foreach ($listaTerapeutas as $terapeuta): ?>
+        <option value="<?= $terapeuta['id_terapeuta']?>">
+            <?= htmlspecialchars($terapeuta['descripcion']) ?>
+        </option>
 
-            <label for="fecha">Elegir fecha:</label>
-            <input type="date" name="fecha">
+    <?php endforeach; ?>
+</select>
+
+            <label for="fecha" >Elegir fecha:</label>
+            <input type="date" name="fecha" required>
 
             <label for="hora">Elegir hora:</label>
-            <input type="time" name="hora">
+            <input type="time" name="hora" required>
             
             <button type="submit" class="submit">Confirmar Turno</button>
         </div>

@@ -11,16 +11,32 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../css/style.css">
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
     <header>
         <h1>CalmaTurnos</h1>
         <nav class="nav-links">
-            <a href="/Pagina-web-dw/controllers/CVturno.php" class="log-btn" id="Turno-btn">Pedir Turno</a>
-            <a href="/Pagina-web-dw/controllers/Clogin.php" class="log-btn">Iniciar sesión</a>
+            <?php if (!isset($_SESSION['id_usu'])): ?>
+         <a href="/Pagina-web-dw/controllers/Clogin.php" class="log-btn">Iniciar sesión</a>
             <a href="../controllers/CVsignup.php" class="log-btn">Registrarse</a>
+            <?php else: ?>
+            <a href="/Pagina-web-dw/controllers/CVturno.php" class="log-btn" id="Turno-btn">Pedir Turno</a>
+            <a href="/Pagina-web-dw/controllers/CverTurnos.php" class="log-btn" id="Turno-btn"->Ver mis turnos</a>
+
         </nav>
+
+
+      <div class="login-menu">
+            <p style="margin: 0.5em 1em; font-weight: bold;">
+              Mi cuenta: <?php echo htmlspecialchars($_SESSION['id_usu'] ?? 'id_usu'); ?>
+            </p>
+            <a href="/Pagina-web-dw/controllers/Clogout.php" class="button" style="margin: 0.5em 1em; font-weight: bold;">Cerrar sesión</a>
+          <?php endif; ?>
+      </div>
+
 </header>
 
     <main>
