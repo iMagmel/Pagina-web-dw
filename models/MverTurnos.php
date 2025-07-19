@@ -7,6 +7,7 @@ class MverTurnos {
     public function __construct() {
         $conexion = new Conexion();
         $this->con = $conexion->Conectar();
+        
     }
 
     public function ObtenerTurnosPorUsuario($id_usuario) {
@@ -31,7 +32,7 @@ class MverTurnos {
         }
 
         $stmt->close();
-        $this->con->next_result(); // Limpiar resultados
+        $this->con->next_result();
 
         return $turnos;
     }

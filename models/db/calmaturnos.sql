@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2025 a las 23:06:36
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Tiempo de generación: 19-07-2025 a las 04:55:38
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -26,50 +25,41 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AgregarTurno` (IN `_fecha` DATE, IN `_hora` TIME, IN `_id_terapeuta` INT, IN `_usuario` VARCHAR(100))  BEGIN
-    DECLARE v_id_usuario INT;
-
-    -- Buscar ID del usuario por nombre de usuario
-    SELECT id_usu INTO v_id_usuario
-    FROM usuarios
-    WHERE n_usuario = _usuario
-    LIMIT 1;
-
-    -- Insertar turno
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AgregarTurno` (IN `_fecha` DATE, IN `_hora` TIME, IN `_id_terapeuta` INT, IN `_id_usuario` INT)   BEGIN
     INSERT INTO turnos (fecha, hora, id_terapeuta, id_usuario)
-    VALUES (_fecha, _hora, _id_terapeuta, v_id_usuario);
+    VALUES (_fecha, _hora, _id_terapeuta, _id_usuario);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_BuscarUsuario` (IN `_usuario` VARCHAR(30), IN `_contrasena` VARCHAR(30))  BEGIN
-    SELECT n_usuario, contrasena
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_BuscarUsuario` (IN `_usuario` VARCHAR(30), IN `_password` VARCHAR(30))   BEGIN
+    SELECT id_usu, n_usuario
     FROM usuarios
-    WHERE n_usuario = _usuario AND contrasena = _contrasena;
+    WHERE n_usuario = _usuario AND contrasena = _password;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambiarContrasena` (IN `_email` VARCHAR(100), IN `_nueva_contrasena` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambiarContrasena` (IN `_email` VARCHAR(100), IN `_nueva_contrasena` VARCHAR(30))   BEGIN
 	UPDATE usuarios
     SET contrasena = _nueva_contrasena
     WHERE email = _email;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CrearUsuario` (IN `_nombre` VARCHAR(20), IN `_apellido` VARCHAR(20), IN `_usuario` VARCHAR(30), IN `_email` VARCHAR(50), IN `_contrasena` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CrearUsuario` (IN `_nombre` VARCHAR(20), IN `_apellido` VARCHAR(20), IN `_usuario` VARCHAR(30), IN `_email` VARCHAR(50), IN `_contrasena` VARCHAR(30))   BEGIN
     INSERT INTO usuarios(nombre, apellido, n_usuario, email, contrasena)
     VALUES(_nombre, _apellido, _usuario, _email, _contrasena);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GuardarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GuardarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))   BEGIN
     UPDATE usuarios
     SET codrecuperacion = _codigo
     WHERE email = _email;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTerapeutas` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTerapeutas` ()   BEGIN
     SELECT id_terapeuta, nombre, apellido, descripcion
     FROM terapeutas
     ORDER BY id_terapeuta ASC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTurnosUsuario` (IN `_id_usuario` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTurnosUsuario` (IN `_id_usuario` INT)   BEGIN
     SELECT t.id_turno, t.fecha, t.hora, te.nombre AS nombre_terapeuta, te.apellido AS apellido_terapeuta, te.descripcion
     FROM turnos t
     INNER JOIN terapeutas te ON t.id_terapeuta = te.id_terapeuta
@@ -77,13 +67,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTurnosUsuario` (IN `_id_u
     ORDER BY t.fecha DESC, t.hora DESC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))   BEGIN
     SELECT id_usu
     FROM usuarios
     WHERE email = _email AND codrecuperacion = _codigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarEmail` (IN `_email` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarEmail` (IN `_email` VARCHAR(100))   BEGIN
     SELECT id_usu
     FROM usuarios
     WHERE email = _email;
@@ -102,7 +92,7 @@ CREATE TABLE `terapeutas` (
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `descripcion` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `terapeutas`
@@ -126,7 +116,7 @@ CREATE TABLE `turnos` (
   `hora` time DEFAULT NULL,
   `id_terapeuta` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `turnos`
@@ -137,7 +127,11 @@ INSERT INTO `turnos` (`id_turno`, `fecha`, `hora`, `id_terapeuta`, `id_usuario`)
 (6, '2025-07-01', '16:42:00', 2, 1),
 (7, '2025-07-03', '22:36:00', 1, 1),
 (8, '2025-07-06', '22:37:00', 2, 1),
-(9, '2025-07-03', '17:47:00', 2, 1);
+(9, '2025-07-03', '17:47:00', 2, 1),
+(10, '2025-07-05', '23:10:00', 1, NULL),
+(11, '2025-07-05', '00:12:00', 1, NULL),
+(12, '0000-00-00', '00:00:01', 1, NULL),
+(13, '2025-07-03', '23:22:00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -153,7 +147,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `contrasena` varchar(30) NOT NULL,
   `codrecuperacion` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -200,7 +194,7 @@ ALTER TABLE `terapeutas`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

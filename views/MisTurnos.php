@@ -8,12 +8,25 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <title>Mis Turnos</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <h2 >Mis Turnos</h2>
 
+<header class="header-turnos">
+    <a class="home-link" href="/Pagina-web-dw/views/index.php">
+    <div class="house-icon">
+        <div class="roof"></div>
+        <div class="base"></div>
+    </div>
+</a>
+
+    <h2>Mis Turnos</h2>
+    <div></div>
+</header>
+
+<div class="tabla-turnos-container">
     <?php if (!empty($turnos)): ?>
-        <table>
+        <table class="tabla-turnos">
             <thead>
                 <tr>
                     <th>Fecha</th>
@@ -36,5 +49,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php else: ?>
         <p>No tenés turnos registrados.</p>
     <?php endif; ?>
+</div>
+
 </body>
 </html>

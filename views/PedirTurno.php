@@ -13,8 +13,16 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
     <main class="main-login">
+        
         <form action="" method="post">
         <div class="form-login">
+            <a href="/Pagina-web-dw/views/index.php" class="home-link" aria-label="Volver a inicio">
+    <div class="house-icon">
+        <div class="roof"></div>
+        <div class="base"></div>
+    </div>
+</a>
+
             <h2>Reservar Turno</h2>
 
    <label for="terapeuta">Elegir tipo de masaje:</label>

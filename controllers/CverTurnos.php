@@ -9,8 +9,8 @@ class CverTurnos {
     }
 }
 
-// Solo si se accede desde el navegador directamente
 $id_usuario = $_SESSION['id_usu'] ?? null;
+
 
 if ($id_usuario) {
     $controlador = new CverTurnos();
@@ -19,4 +19,5 @@ if ($id_usuario) {
 } else {
     echo "Usuario no autenticado.";
 }
+
 ?>

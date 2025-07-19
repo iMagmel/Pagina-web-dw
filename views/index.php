@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../controllers/CVturno.php";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -31,7 +32,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
       <div class="login-menu">
             <p style="margin: 0.5em 1em; font-weight: bold;">
-              Mi cuenta: <?php echo htmlspecialchars($_SESSION['id_usu'] ?? 'id_usu'); ?>
+              Mi cuenta: <?php echo htmlspecialchars($_SESSION['n_usuario'] ?? 'n_usuario'); ?>
             </p>
             <a href="/Pagina-web-dw/controllers/Clogout.php" class="button" style="margin: 0.5em 1em; font-weight: bold;">Cerrar sesión</a>
           <?php endif; ?>
@@ -56,15 +57,18 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
         <section id="terapeutas">
-            <h2>Terapeutas Asociados</h2>
-            <p>Contamos con una red de profesionales en diferentes especialidades del masaje terapéutico.</p>
-            <ul>
-                <li>💆 María Sol – Masajes relajantes y aromaterapia</li>
-                <li>👐 Esteban Ruiz – Descontracturante y deportivo</li>
-                <li>🦶 Laura M. – Reflexología podal</li>
-                <li>🌿 Centro Holístico Kairos – Atención integral</li>
-            </ul>
-        </section>
+    <h2>Terapeutas Asociados</h2>
+    <p>Contamos con una red de profesionales en diferentes especialidades del masaje terapéutico.</p>
+    <ul>
+        <?php foreach ($listaTerapeutas as $terapeuta): ?>
+            <li>
+                <?= htmlspecialchars($terapeuta['nombre'] ?? 'Terapeuta') ?> – 
+                <?= htmlspecialchars($terapeuta['descripcion']) ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</section>
+
 
         <section id="como-funciona">
             <h2>¿Cómo Reservar?</h2>

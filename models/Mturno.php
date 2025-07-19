@@ -16,9 +16,7 @@ class Mturno {
         if (!$stmt) {
             return "Error en prepare: " . $this->con->error;
         }
-
-        // Importante: validar los tipos de datos. Si terapeuta y usuario son enteros:
-        $stmt->bind_param("ssis", $fecha, $hora, $terapeuta, $usuario);
+        $stmt->bind_param("ssii", $fecha, $hora, $terapeuta, $usuario);
 
         if ($stmt->execute()) {
             $stmt->close();
