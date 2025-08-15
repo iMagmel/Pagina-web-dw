@@ -12,16 +12,27 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
 
-<header class="header-turnos">
-    <a class="home-link" href="/Pagina-web-dw/views/index.php">
-    <div class="house-icon">
-        <div class="roof"></div>
-        <div class="base"></div>
-    </div>
-</a>
 
-    <h2>Mis Turnos</h2>
-    <div></div>
+<header>
+        <h1><a href="/../Pagina-web-dw/views/index.php" style="text-decoration: none; color: #000;">CalmaTurnos</a></h1>
+        <nav class="nav-links">
+            <?php if (!isset($_SESSION['id_usu'])): ?>
+         <a href="/Pagina-web-dw/controllers/Clogin.php" class="log-btn">Iniciar sesión</a>
+            <a href="../controllers/CVsignup.php" class="log-btn">Registrarse</a>
+            <?php else: ?>
+            <a href="/Pagina-web-dw/controllers/CVturno.php" class="log-btn" id="Turno-btn">Pedir Turno</a>
+
+        </nav>
+
+
+      <div class="login-menu">
+            <p style="margin: 0.5em 1em; font-weight: bold;">
+              Mi cuenta: <?php echo htmlspecialchars($_SESSION['n_usuario'] ?? 'n_usuario'); ?>
+            </p>
+            <a href="/Pagina-web-dw/controllers/Clogout.php" class="button" style="margin: 0.5em 1em; font-weight: bold;">Cerrar sesión</a>
+          <?php endif; ?>
+      </div>
+
 </header>
 
 <div class="tabla-turnos-container">

@@ -7,7 +7,7 @@ class Log {
             return "Todos los campos son obligatorios.";
         }
 
-        $passhash = hash('sha256', $usuario.$password);
+        $passhash = hash('sha256',$password);
         $modelo = new MLogin();
         $resultado = $modelo->Log($usuario, $passhash);
 
@@ -15,8 +15,13 @@ class Log {
             session_start();
             $_SESSION["id_usu"] = $resultado["id_usu"];
             $_SESSION["n_usuario"] = $resultado["n_usuario"];
+            $_SESSION["admin"] = $resultado["admin"];
 
-            header("Location: /Pagina-web-dw/views/index.php");
+            if ($resultado["admin"] == 1) {
+                header("Location: /Pagina-web-dw/views/admin.php");
+            } else {
+                header("Location: /Pagina-web-dw/views/index.php");
+            }
             exit();
         } else {
             return "Usuario y contraseña incorrectos.";

@@ -10,8 +10,9 @@ if ($nueva_contraseña !== $confirmacion_contraseña) {
     die("Las contraseñas no coinciden.");
 }
 
+$npasshas = hash('sha256', $nueva_contraseña);
 $modelo = new Mfpass();
-$modelo->cambiarContraseña($email, $nueva_contraseña);
+$modelo->cambiarContraseña($email, $ncontraseña);
 
 unset($_SESSION['recuperar_email']);
 echo '<script> alert("Contraseña cambiada exitosamente. Puedes iniciar sesión con tu nueva contraseña.")</script>';

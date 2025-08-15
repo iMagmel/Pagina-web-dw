@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-07-2025 a las 04:55:38
+-- Tiempo de generación: 15-08-2025 a las 07:33:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,10 +34,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AgregarTurno` (IN `_fecha` DATE,
     VALUES (_fecha, _hora, _id_terapeuta, _id_usuario);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_BuscarUsuario` (IN `_usuario` VARCHAR(30), IN `_password` VARCHAR(30))   BEGIN
-    SELECT id_usu, n_usuario
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_BuscarUsuario` (IN `_usuario` VARCHAR(30), IN `_password` VARCHAR(256))   BEGIN
+    SELECT id_usu, n_usuario, admin
     FROM usuarios
-    WHERE n_usuario = _usuario AND contrasena = _password;
+    WHERE n_usuario = _usuario 
+      AND contrasena = _password;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambiarContrasena` (IN `_email` VARCHAR(100), IN `_nueva_contrasena` VARCHAR(30))   BEGIN
@@ -46,9 +47,34 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambiarContrasena` (IN `_email` 
     WHERE email = _email;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CrearUsuario` (IN `_nombre` VARCHAR(20), IN `_apellido` VARCHAR(20), IN `_usuario` VARCHAR(30), IN `_email` VARCHAR(50), IN `_contrasena` VARCHAR(30))   BEGIN
-    INSERT INTO usuarios(nombre, apellido, n_usuario, email, contrasena)
-    VALUES(_nombre, _apellido, _usuario, _email, _contrasena);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CrearUsuario` (IN `_nombre` VARCHAR(20), IN `_apellido` VARCHAR(20), IN `_usuario` VARCHAR(30), IN `_email` VARCHAR(50), IN `_contrasena` VARCHAR(256))   BEGIN
+    INSERT INTO usuarios(nombre, apellido, n_usuario, email, contrasena, rol)
+    VALUES(_nombre, _apellido, _usuario, _email, _contrasena, 0);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteUsuario` (IN `_id_usuario` INT)   BEGIN
+    DELETE FROM usuarios
+    WHERE id_usu = _id_usuario;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetLogs` ()   BEGIN
+    SELECT l.id_log, u.n_usuario AS usuario, l.fecha, l.hora, t.descripcion AS servicio
+    FROM logs l
+    JOIN usuarios u ON u.id_usu = l.id_usuario
+    JOIN terapeutas t ON t.id_terapeuta = l.id_terapeuta
+    ORDER BY l.fecha DESC, l.hora DESC;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetUsuarioPorId` (IN `_id_usuario` INT)   BEGIN
+    SELECT id_usu, n_usuario, email, admin
+    FROM usuarios
+    WHERE id_usu = _id_usuario;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetUsuarios` ()   BEGIN
+    SELECT id_usu, n_usuario, email, admin
+    FROM usuarios
+    ORDER BY n_usuario ASC;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GuardarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))   BEGIN
@@ -71,6 +97,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerTurnosUsuario` (IN `_id_u
     ORDER BY t.fecha DESC, t.hora DESC;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateUsuario` (IN `_id_usuario` INT, IN `_n_usuario` VARCHAR(30), IN `_email` VARCHAR(50), IN `_admin` TINYINT)   BEGIN
+    UPDATE usuarios
+    SET n_usuario = _n_usuario,
+        email = _email,
+        admin = _admin
+    WHERE id_usu = _id_usuario;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarCodRecuperacion` (IN `_email` VARCHAR(100), IN `_codigo` VARCHAR(10))   BEGIN
     SELECT id_usu
     FROM usuarios
@@ -84,6 +118,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerificarEmail` (IN `_email` VAR
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logs`
+--
+
+CREATE TABLE `logs` (
+  `id_log` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_terapeuta` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -135,7 +183,9 @@ INSERT INTO `turnos` (`id_turno`, `fecha`, `hora`, `id_terapeuta`, `id_usuario`)
 (10, '2025-07-05', '23:10:00', 1, NULL),
 (11, '2025-07-05', '00:12:00', 1, NULL),
 (12, '0000-00-00', '00:00:01', 1, NULL),
-(13, '2025-07-03', '23:22:00', 2, 1);
+(13, '2025-07-03', '23:22:00', 2, 1),
+(14, '2025-08-30', '19:00:00', 1, 2),
+(15, '2025-08-30', '18:05:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -149,20 +199,31 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(20) NOT NULL,
   `n_usuario` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `contrasena` varchar(30) NOT NULL,
-  `codrecuperacion` int(11) DEFAULT NULL
+  `contrasena` varchar(256) NOT NULL,
+  `codrecuperacion` int(11) DEFAULT NULL,
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usu`, `nombre`, `apellido`, `n_usuario`, `email`, `contrasena`, `codrecuperacion`) VALUES
-(1, 'rodrigo', 'novelino', 'iMagmel', 'novelinorodrigo3@gmail.com', '12345678', 9737);
+INSERT INTO `usuarios` (`id_usu`, `nombre`, `apellido`, `n_usuario`, `email`, `contrasena`, `codrecuperacion`, `admin`) VALUES
+(1, 'rodrigo', 'novelino', 'iMagmel', 'novelinorodrigo3@gmail.com', 'Admin123.', 4074, 1),
+(2, 'Juan', 'Burger', 'JuanB', 'juanfranciscoburger07@gmail.com', 'mate', 5991, 0),
+(3, 'geronimo', 'carpignano', 'gerofoxy', 'coheb95527@jobzyy.com', 'Admin123.', 7999, 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id_log`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_terapeuta` (`id_terapeuta`);
 
 --
 -- Indices de la tabla `terapeutas`
@@ -189,6 +250,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `terapeutas`
 --
 ALTER TABLE `terapeutas`
@@ -198,17 +265,24 @@ ALTER TABLE `terapeutas`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `logs`
+--
+ALTER TABLE `logs`
+  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usu`) ON DELETE CASCADE,
+  ADD CONSTRAINT `logs_ibfk_2` FOREIGN KEY (`id_terapeuta`) REFERENCES `terapeutas` (`id_terapeuta`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `turnos`

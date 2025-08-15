@@ -1,5 +1,6 @@
 html {
     font-size: 16px;
+    color: #000;
 }
 
 body {
@@ -262,4 +263,44 @@ footer{
     section h2 {
         font-size: 1.5rem;
     }
+}
+/* Botones dentro de la tabla */
+.btn-editar, .btn-eliminar {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-right: 0.3rem;
+}
+
+/* Modal tipo desplegable desde arriba */
+.modal {
+    position: fixed;
+    top: -100%; /* Empieza fuera de la pantalla */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* se pega al top */
+    padding-top: 50px; /* espacio desde la parte superior */
+    transition: top 0.4s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal.show {
+    top: 0; /* se despliega a la vista */
+}
+
+.modal-content {
+    background-color: #F5F0E6;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.3);
+    position: relative;
 }

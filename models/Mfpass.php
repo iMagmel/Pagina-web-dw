@@ -64,16 +64,17 @@ class Mfpass {
     }
 
     public function cambiarContraseña($contraseña, $nueva_contraseña) {
-        $sql = "CALL sp_CambiarContrasena(?, ?)";
-        $stmt = $this->con->prepare($sql);
+            $sql = "CALL sp_CambiarContrasena(?, ?)";
+            $stmt = $this->con->prepare($sql);
 
-        if (!$stmt) {
-            die("Error en prepare: " . $this->con->error);
-        }
+            if (!$stmt) {
+                die("Error en prepare: " . $this->con->error);
+            }
 
-        $stmt->bind_param("ss", $contraseña, $nueva_contraseña);
-        $stmt->execute();
-        $stmt->close();
+            $stmt->bind_param("ss", $passhash, $npasshas);
+            $stmt->execute();
+            $stmt->close();
+            }
+        
     }
-}
 ?>
