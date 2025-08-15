@@ -13,4 +13,5 @@ class CTurno {
         return $modelo->Pedirturno($terapeuta, $fecha, $hora, $usu);
     }
 }
+
 ?>

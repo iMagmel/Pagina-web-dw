@@ -1,9 +1,14 @@
 <?php
-require_once __DIR__ . "/../controllers/CVturno.php";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once __DIR__ . '/../controllers/CTurno.php';
+
+$controlador = new CTurno();
+$listaTerapeutas = $controlador->ObtenerTerapeutas();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,16 +61,20 @@ if (session_status() == PHP_SESSION_NONE) {
         </section>
 
 
-        <section id="terapeutas">
+<section id="terapeutas">
     <h2>Terapeutas Asociados</h2>
     <p>Contamos con una red de profesionales en diferentes especialidades del masaje terapéutico.</p>
     <ul>
-        <?php foreach ($listaTerapeutas as $terapeuta): ?>
-            <li>
-                <?= htmlspecialchars($terapeuta['nombre'] ?? 'Terapeuta') ?> – 
-                <?= htmlspecialchars($terapeuta['descripcion']) ?>
-            </li>
-        <?php endforeach; ?>
+        <?php if(!empty($listaTerapeutas) && is_array($listaTerapeutas)): ?>
+            <?php foreach ($listaTerapeutas as $terapeuta): ?>
+                <li>
+                    <?= htmlspecialchars($terapeuta['nombre'] ?? 'Terapeuta') ?> – 
+                    <?= htmlspecialchars($terapeuta['descripcion'] ?? '') ?>
+                </li>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <li>No hay terapeutas disponibles.</li>
+        <?php endif; ?>
     </ul>
 </section>
 

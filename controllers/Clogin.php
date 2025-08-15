@@ -7,8 +7,9 @@ class Log {
             return "Todos los campos son obligatorios.";
         }
 
+        $passhash = hash('sha256', $usuario.$password);
         $modelo = new MLogin();
-        $resultado = $modelo->Log($usuario, $password);
+        $resultado = $modelo->Log($usuario, $passhash);
 
         if ($resultado && isset($resultado['id_usu'])) {
             session_start();

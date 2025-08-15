@@ -7,7 +7,6 @@ session_start();
 $controlador = new CTurno();
 $listaTerapeutas = $controlador->ObtenerTerapeutas();
 
-// Procesar formulario si se envió
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $terapeuta = $_POST['terapeuta'] ?? null;
     $fecha = $_POST['fecha'] ?? null;
@@ -28,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Mostrar la vista
 require_once __DIR__ . '/../views/PedirTurno.php';
 
 ?>
